@@ -1,0 +1,1001 @@
+/* Global design tokens, typography, and dark sky-blue page defaults. */
+:root {
+  color-scheme: dark;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  color: #e8f4fb;
+  background: #07131f;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --color-background: #07131f;
+  --color-surface: #0e2030;
+  --color-surface-raised: #142b3e;
+  --color-sky: #69c9f5;
+  --color-sky-bright: #9cddfb;
+  --color-text-muted: #b4c8d6;
+  --color-border: rgb(156 221 251 / 18%);
+}
+
+/* Predictable sizing and smooth anchor navigation throughout the document. */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  /* Clip stray wide content rather than allowing sideways page scrolling. */
+  overflow-x: clip;
+}
+
+body {
+  max-width: 100%;
+  margin: 0;
+  overflow-x: clip;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgb(40 104 145 / 16%), transparent 34rem),
+    var(--color-background);
+  color: #e8f4fb;
+  line-height: 1.7;
+}
+
+a {
+  color: inherit;
+}
+
+img,
+picture,
+video,
+iframe {
+  display: block;
+  max-width: 100%;
+}
+
+img,
+video {
+  height: auto;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+::selection {
+  background: var(--color-sky);
+  color: #07131f;
+}
+
+/* Header and navigation: horizontal brand and accessible section links. */
+body > header {
+  position: sticky;
+  z-index: 22;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1rem clamp(1.25rem, 6vw, 5.5rem);
+  border-bottom: 1px solid var(--color-border);
+  background: rgb(7 19 31 / 94%);
+  backdrop-filter: blur(14px);
+}
+
+body > header > a {
+  color: var(--color-sky);
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 0.035em;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+body > header > a:hover {
+  color: var(--color-sky-bright);
+}
+
+.menu-toggle {
+  display: none;
+  width: 2.8rem;
+  height: 2.8rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.6rem;
+  background: var(--color-surface);
+  color: var(--color-sky-bright);
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 1.15rem;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+.menu-toggle:hover,
+.menu-toggle:focus-visible {
+  border-color: var(--color-sky);
+  background: var(--color-surface-raised);
+}
+
+/* Buttons and links show immediate pressed feedback on pointer and touch input. */
+button:active,
+a:active {
+  filter: brightness(1.18);
+}
+
+.menu-close,
+.menu-backdrop {
+  display: none;
+}
+
+.welcome-toast {
+  position: fixed;
+  z-index: 25;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  left: max(1rem, env(safe-area-inset-left));
+  width: fit-content;
+  max-width: min(32rem, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 0.8rem 1.1rem;
+  border: 1px solid rgb(105 201 245 / 55%);
+  border-radius: 999px;
+  background: #10283a;
+  color: var(--color-sky-bright);
+  box-shadow: 0 0.6rem 2rem rgb(0 0 0 / 35%);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+  pointer-events: none;
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2.25rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav a {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  font-weight: 650;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+nav a:hover,
+nav a:focus-visible,
+nav a.nav-is-hovered {
+  color: var(--color-sky-bright);
+}
+
+nav a[aria-current="page"],
+nav a.nav-is-active {
+  color: var(--color-sky-bright);
+  text-decoration: underline;
+  text-decoration-color: var(--color-sky);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.45rem;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-sky);
+  outline-offset: 4px;
+}
+
+/* Main content width keeps long lines readable on wide desktop screens. */
+main {
+  width: min(100% - 2.5rem, 74rem);
+  margin: 0 auto;
+  touch-action: pan-y pinch-zoom;
+  transform: translateX(0);
+  opacity: 1;
+  transition:
+    transform 180ms ease,
+    opacity 180ms ease;
+}
+
+/* Brief directional fade makes mobile swipe navigation feel like a page transition. */
+main.swipe-transition--next {
+  transform: translateX(-0.75rem);
+  opacity: 0;
+}
+
+main.swipe-transition--previous {
+  transform: translateX(0.75rem);
+  opacity: 0;
+}
+
+/* Hero: prominent welcome, headline, supporting copy, and primary link. */
+#home {
+  display: flex;
+  min-height: clamp(32rem, 76vh, 46rem);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+  padding: clamp(4rem, 10vw, 8rem) clamp(1.25rem, 5vw, 4rem);
+  background:
+    linear-gradient(rgb(3 12 20 / 58%), rgb(3 12 20 / 58%)),
+    url("../images/skyee.jpeg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+}
+
+#home > p:first-child {
+  margin-bottom: 1rem;
+  color: var(--color-sky);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 750;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+#home h1 {
+  width: min(100%, 52rem);
+  margin-bottom: 1.25rem;
+  color: var(--color-sky-bright);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  font-size: clamp(2.4rem, 7vw, 5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.04;
+  text-wrap: balance;
+  text-shadow: 0 2px 20px rgb(0 0 0 / 55%);
+}
+
+#home p:nth-of-type(2) {
+  width: min(100%, 36rem);
+  margin-bottom: 1.75rem;
+  color: #fff;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 450;
+  line-height: 1.75;
+  letter-spacing: 0.04em;
+  text-shadow: 0 1px 10px rgb(0 0 0 / 65%);
+  text-wrap: pretty;
+}
+
+/* All pages share the same balanced, centered hero typography and rhythm. */
+body > main > #home {
+  text-align: center;
+}
+
+body > main > #home > p:first-child {
+  margin-bottom: clamp(0.9rem, 2vw, 1.25rem);
+}
+
+body > main > #home h1 {
+  margin-bottom: clamp(1.1rem, 2.5vw, 1.6rem);
+}
+
+body > main > #home p:nth-of-type(2) {
+  margin-bottom: 0;
+}
+
+/* Vapes and Drinks heroes zoom the shared image layer without stretching it. */
+body.page-vapes #home,
+body.page-drinks #home {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: none;
+}
+
+body.page-vapes #home::before,
+body.page-drinks #home::before,
+body.page-vapes #home::after,
+body.page-drinks #home::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+}
+
+body.page-vapes #home::before,
+body.page-drinks #home::before {
+  background: url("../images/skyee.jpeg") center / cover no-repeat;
+  transform: scale(1.06);
+}
+
+body.page-vapes #home::after,
+body.page-drinks #home::after {
+  background: linear-gradient(rgb(3 12 20 / 62%), rgb(3 12 20 / 62%));
+}
+
+body.page-vapes #home > *,
+body.page-drinks #home > * {
+  position: relative;
+}
+
+body.page-vapes #home h1,
+body.page-drinks #home h1 {
+  color: var(--color-sky-bright);
+  text-shadow: 0 2px 20px rgb(0 0 0 / 55%);
+}
+
+body.page-vapes #home p:nth-of-type(2),
+body.page-drinks #home p:nth-of-type(2) {
+  color: #fff;
+  letter-spacing: 0.035em;
+  text-shadow: 0 1px 10px rgb(0 0 0 / 60%);
+}
+
+#home > a {
+  display: inline-flex;
+  min-height: 2.9rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.3rem;
+  border: 1px solid var(--color-sky);
+  border-radius: 999px;
+  background: var(--color-sky);
+  color: #07131f;
+  font-weight: 750;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+#home > a:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-sky-bright);
+  background: var(--color-sky-bright);
+  box-shadow: 0 0.5rem 1.5rem rgb(105 201 245 / 20%);
+}
+
+/* Category links: two full-card links to the Vapes and Cold Drinks pages. */
+.category-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 3vw, 1.5rem);
+  margin: 0 auto clamp(3.5rem, 8vw, 6rem);
+}
+
+.category-card {
+  position: relative;
+  display: flex;
+  min-height: 15rem;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: hidden;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid rgb(105 201 245 / 48%);
+  border-radius: 1.25rem;
+  background:
+    radial-gradient(ellipse at 100% 0%, rgb(105 201 245 / 13%), transparent 58%),
+    linear-gradient(145deg, var(--color-surface-raised), var(--color-surface));
+  color: var(--color-sky-bright);
+  text-decoration: none;
+  box-shadow: 0 0.5rem 1.75rem rgb(0 0 0 / 14%);
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    background-color 220ms ease;
+}
+
+.category-card:hover,
+.category-card:focus-visible {
+  transform: translateY(-6px);
+  border-color: var(--color-sky-bright);
+  box-shadow:
+    0 0 0 1px rgb(105 201 245 / 18%),
+    0 1rem 2.5rem rgb(0 0 0 / 28%),
+    0 0 2rem rgb(105 201 245 / 20%);
+}
+
+.category-card:focus-visible {
+  outline-offset: 5px;
+}
+
+.category-card__eyebrow {
+  margin-bottom: 0.65rem;
+  color: var(--color-sky);
+  font-size: 0.75rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.category-card__title {
+  margin-bottom: 0.4rem;
+  color: #e8f4fb;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+}
+
+.category-card__description {
+  max-width: 27rem;
+  color: var(--color-text-muted);
+}
+
+.category-card__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.15rem;
+  color: var(--color-sky-bright);
+  font-size: 0.92rem;
+  font-weight: 750;
+}
+
+.category-card__action span {
+  transition: transform 180ms ease;
+}
+
+.category-card:hover .category-card__action span,
+.category-card:focus-visible .category-card__action span {
+  transform: translateX(4px);
+}
+
+/* Vape product section and reusable product-card styles for future content. */
+#vape,
+#drinks,
+#about {
+  scroll-margin-top: 6rem;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  padding: clamp(3.5rem, 7vw, 6rem) clamp(1.5rem, 5vw, 4rem);
+  border-top: 1px solid var(--color-border);
+}
+
+#vape {
+  border: 1px solid var(--color-border);
+  border-radius: 1.5rem;
+  background: linear-gradient(145deg, var(--color-surface-raised), var(--color-surface));
+}
+
+#vape h2,
+#drinks h2,
+#about h2 {
+  margin-bottom: 0.85rem;
+  color: var(--color-sky-bright);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+}
+
+#vape > p,
+#drinks > p,
+#about > p {
+  max-width: 45rem;
+  margin-bottom: 0;
+  color: #d7e5ee;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  text-wrap: pretty;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  grid-auto-rows: 1fr;
+  align-items: stretch;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.product-card {
+  display: flex;
+  height: 100%;
+  min-width: 0;
+  min-height: 12.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow-wrap: anywhere;
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  background: var(--color-surface);
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  border-color: rgb(105 201 245 / 60%);
+  background: var(--color-surface-raised);
+  box-shadow: 0 0.8rem 2rem rgb(0 0 0 / 28%), 0 0 1.4rem rgb(105 201 245 / 10%);
+}
+
+.product-card:active {
+  transform: translateY(-2px) scale(0.99);
+  border-color: var(--color-sky);
+  box-shadow: 0 0.5rem 1.5rem rgb(105 201 245 / 16%);
+}
+
+.product-card.is-highlighted {
+  border-color: var(--color-sky);
+  box-shadow: 0 0.5rem 1.5rem rgb(105 201 245 / 12%);
+}
+
+.product-card.is-selected,
+.product-card.is-selected:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-sky-bright);
+  background:
+    linear-gradient(145deg, rgb(105 201 245 / 12%), transparent 75%),
+    var(--color-surface-raised);
+  box-shadow:
+    0 0 0 1px rgb(105 201 245 / 24%),
+    0 0.65rem 1.8rem rgb(105 201 245 / 12%);
+}
+
+.product-card:focus-visible {
+  outline: 2px solid var(--color-sky);
+  outline-offset: 3px;
+}
+
+.product-price {
+  margin: auto 0 0;
+  padding-top: 0.85rem;
+  color: var(--color-sky-bright);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.product-detail,
+.product-status {
+  margin: 0.4rem 0 0;
+  color: var(--color-text-muted);
+  overflow-wrap: anywhere;
+}
+
+.product-status {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 0.3rem 0.65rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  color: var(--color-sky-bright);
+  font-size: 0.85rem;
+  font-weight: 650;
+  margin-top: auto;
+}
+
+.vape-catalog {
+  scroll-margin-top: 6rem;
+  padding: 0 clamp(1.25rem, 5vw, 4rem) clamp(4rem, 8vw, 6rem);
+}
+
+/* Keep category grids evenly spaced and capped for balanced desktop card rows. */
+body.page-vapes .vape-catalog,
+body.page-drinks #drinks {
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+body.page-vapes .vape-catalog .product-grid,
+body.page-drinks #drinks .product-grid {
+  width: 100%;
+  max-width: 68rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+body.page-vapes .vape-catalog .product-card,
+body.page-drinks #drinks .product-card {
+  min-height: 13rem;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  border-color: rgb(105 201 245 / 22%);
+  border-radius: 1.1rem;
+  box-shadow: 0 0.5rem 1.5rem rgb(0 0 0 / 14%);
+}
+
+body.page-vapes .vape-catalog .product-card:hover,
+body.page-drinks #drinks .product-card:hover {
+  transform: translateY(-4px);
+  border-color: rgb(105 201 245 / 68%);
+  box-shadow:
+    0 0.8rem 2rem rgb(0 0 0 / 28%),
+    0 0 1.5rem rgb(105 201 245 / 14%);
+}
+
+body.page-vapes .vape-catalog .product-card h3,
+body.page-drinks #drinks .product-card h3 {
+  width: 100%;
+}
+
+body.page-vapes .catalog-note,
+body.page-vapes .age-note {
+  max-width: 68rem;
+}
+
+.vape-catalog > h2 {
+  margin-bottom: 0;
+  color: var(--color-sky-bright);
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  letter-spacing: -0.035em;
+}
+
+.vapes-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  align-items: stretch;
+}
+
+.vape-card {
+  min-height: 12.5rem;
+  box-shadow: 0 0.5rem 1.5rem rgb(0 0 0 / 12%);
+}
+
+.catalog-note {
+  margin: 2rem 0 0;
+  padding: 1.1rem 1.25rem;
+  border-left: 3px solid var(--color-sky);
+  border-radius: 0 0.75rem 0.75rem 0;
+  background: var(--color-surface);
+  color: #e8f4fb;
+}
+
+.vape-catalog > .age-note {
+  margin: 1rem 0 0;
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+}
+
+.product-card h3 {
+  min-height: 2.4em;
+  margin: 0 0 0.5rem;
+  color: var(--color-sky-bright);
+  font-size: 1.15rem;
+  font-weight: 750;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+.product-card p {
+  margin-bottom: 0;
+  color: var(--color-text-muted);
+}
+
+/* Generic media classes keep future shop photography and embeds within layout. */
+.section-image {
+  width: 100%;
+  max-height: 34rem;
+  border: 1px solid var(--color-border);
+  border-radius: 1.25rem;
+  object-fit: cover;
+}
+
+/* Drinks section uses a subtly accented panel distinct from the product area. */
+#drinks {
+  margin-top: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 1.5rem;
+  background:
+    linear-gradient(120deg, rgb(29 86 119 / 30%), transparent 70%),
+    var(--color-surface);
+}
+
+/* About section provides a calm closing content area before the footer. */
+#about {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+/* Footer separates legal and copyright information from the main page. */
+body > footer {
+  padding: 1.75rem clamp(1.25rem, 6vw, 5.5rem);
+  border-top: 1px solid var(--color-border);
+  background: #050d15;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+body > footer p {
+  margin: 0.35rem 0;
+}
+
+body > footer p:last-child {
+  font-size: 0.88rem;
+}
+
+/* Wide desktop screens get more breathing room without overlong text lines. */
+@media (min-width: 1440px) {
+  main {
+    width: min(100% - 8rem, 80rem);
+  }
+
+  #home {
+    min-height: min(78vh, 52rem);
+  }
+}
+
+/* Laptop and compact desktop layouts keep section spacing proportional. */
+@media (min-width: 761px) and (max-width: 1100px) {
+  main {
+    width: min(100% - 3rem, 68rem);
+  }
+
+  #home {
+    min-height: 70vh;
+  }
+}
+
+/* Tablet adjustments preserve spacing while the header and content narrow. */
+@media (max-width: 760px) {
+  body > header {
+    gap: 1.25rem;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  main {
+    width: min(100% - 2rem, 68rem);
+  }
+
+  #home {
+    min-height: 68vh;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+    gap: 1rem;
+  }
+
+  .product-card {
+    padding: 1.25rem;
+  }
+}
+
+/* Below 768px, keep the header sticky and use the jQuery-animated drawer. */
+@media (max-width: 767px) {
+  body > header {
+    position: sticky;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    backdrop-filter: none;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+  }
+
+  body.page-vapes .vape-catalog .product-grid,
+  body.page-drinks #drinks .product-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  body.page-vapes #home,
+  body.page-drinks #home {
+    min-height: 62vh;
+  }
+
+  body > header nav {
+    position: fixed;
+    z-index: 22;
+    top: 0;
+    right: -100%;
+    bottom: 0;
+    display: block;
+    width: min(84vw, 22rem);
+    padding: 5.5rem 1.5rem 2rem;
+    border-left: 1px solid var(--color-border);
+    background:
+      radial-gradient(ellipse at 100% 0%, rgb(105 201 245 / 12%), transparent 58%),
+      var(--color-surface);
+    box-shadow: -1rem 0 3rem rgb(0 0 0 / 35%);
+    overflow-y: auto;
+  }
+
+  body.menu-open {
+    overflow: hidden;
+  }
+
+  .menu-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: inline-flex;
+    width: 2.75rem;
+    height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-border);
+    border-radius: 0.65rem;
+    background: var(--color-surface-raised);
+    color: var(--color-sky-bright);
+    font: inherit;
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .menu-close:hover,
+  .menu-close:focus-visible {
+    border-color: var(--color-sky);
+    background: #19374e;
+  }
+
+  .menu-backdrop:not([hidden]) {
+    position: fixed;
+    z-index: 21;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: rgb(0 7 13 / 68%);
+    cursor: pointer;
+  }
+
+  /* Keep every mobile navigation and primary action comfortably tappable. */
+  .menu-toggle,
+  .menu-close,
+  body > header nav a,
+  #home > a,
+  .category-card {
+    min-height: 44px;
+  }
+
+  body > header nav ul {
+    align-items: stretch;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.45rem;
+  }
+
+  body > header nav a {
+    display: flex;
+    min-height: 3.25rem;
+    align-items: center;
+    padding: 0.65rem 0.85rem;
+    border: 1px solid transparent;
+    border-radius: 0.65rem;
+    font-size: 1rem;
+  }
+
+  body > header nav a:hover,
+  body > header nav a:focus-visible,
+  body > header nav a[aria-current="page"],
+  body > header nav a.nav-is-active,
+  body > header nav a.nav-is-hovered {
+    border-color: var(--color-border);
+    background: var(--color-surface-raised);
+    text-decoration: none;
+  }
+
+  .welcome-toast {
+    max-width: calc(100% - 2rem);
+    border-radius: 0.85rem;
+  }
+
+  main {
+    width: min(100% - 1.5rem, 70rem);
+  }
+
+  #home {
+    min-height: 62vh;
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+  }
+
+  .category-links {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .category-card {
+    min-height: 13rem;
+  }
+
+  #vape,
+  #drinks,
+  #about {
+    margin-bottom: 2rem;
+    padding: 3.25rem 1.25rem;
+  }
+
+  #about {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+    margin-top: 1.5rem;
+  }
+
+  .product-card {
+    padding: 1.1rem;
+  }
+
+  .product-card.is-selected,
+  .product-card.is-selected:hover {
+    transform: none;
+  }
+
+  body > footer {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* Extra-small screens reduce side gutters and keep the compact menu comfortable. */
+@media (max-width: 360px) {
+  body > header {
+    padding-right: 0.9rem;
+    padding-left: 0.9rem;
+  }
+
+  main {
+    width: calc(100% - 1rem);
+  }
+
+  #home h1 {
+    font-size: clamp(2.2rem, 12vw, 2.75rem);
+  }
+
+  #home > p:first-child {
+    font-size: 0.72rem;
+    letter-spacing: 0.13em;
+  }
+
+  #vape,
+  #drinks {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+}
+
+/* Limit hover-only movement on touch-first devices. */
+@media (hover: none) {
+  .product-card:hover {
+    transform: none;
+  }
+
+  .category-card:hover {
+    transform: none;
+  }
+}
+
+/* Honor reduced-motion preferences while keeping hover and focus feedback. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

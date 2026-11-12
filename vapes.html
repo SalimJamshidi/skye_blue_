@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Document metadata supports search previews and responsive display. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+      name="description"
+      content="Explore vape devices, pods, and other in-store options at Skye Blue. For adults of legal purchasing age only."
+    >
+    <meta name="theme-color" content="#07131f">
+    <title>Vapes | Skye Blue</title>
+
+    <!-- Shared stylesheet keeps navigation and page styling consistent. -->
+    <link rel="stylesheet" href="assets/css/style.css">
+  </head>
+  <body class="page-vapes">
+    <!-- Shared site header and navigation; the current page is identified accessibly. -->
+    <header>
+      <a href="index.html" aria-label="Skye Blue home">Skye Blue</a>
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="site-navigation"
+        aria-label="Open navigation menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="site-navigation" aria-label="Main navigation">
+        <button class="menu-close" type="button" aria-label="Close navigation menu">&times;</button>
+        <ul>
+          <li><a href="index.html" data-page="home">Home</a></li>
+          <li><a href="vapes.html" data-page="vapes">Vapes</a></li>
+          <li><a href="drinks.html" data-page="drinks">Drinks</a></li>
+          <li><a href="index.html#about" data-page="about">About</a></li>
+        </ul>
+      </nav>
+    </header>
+    <!-- A dismissible backdrop sits behind the off-canvas mobile navigation. -->
+    <button class="menu-backdrop" type="button" aria-label="Close navigation menu" hidden></button>
+
+    <!-- Main content introduces the vape selection and provides a responsive product grid. -->
+    <main>
+      <section id="home" aria-labelledby="page-title">
+        <p>Explore the collection</p>
+        <h1 id="page-title">Vapes</h1>
+        <p>
+          Explore our range of devices, pods, and in-store options. Speak with our team
+          for product information.
+        </p>
+      </section>
+
+      <!-- Each semantic product card keeps product name, details, and price easy to scan. -->
+      <section id="vape-catalog" class="vape-catalog" aria-labelledby="catalog-title">
+        <h2 id="catalog-title">Our vape selection</h2>
+        <div class="product-grid vapes-grid" id="vape-products">
+          <article class="product-card vape-card" role="button" tabindex="0" aria-pressed="false">
+            <h3>Hayati</h3>
+            <p class="product-detail">25k puffs</p>
+            <p class="product-price">£13.00</p>
+          </article>
+          <article class="product-card vape-card" role="button" tabindex="0" aria-pressed="false">
+            <h3>Hayati</h3>
+            <p class="product-detail">6k puffs</p>
+            <p class="product-price">£10.00</p>
+          </article>
+          <article class="product-card vape-card" role="button" tabindex="0" aria-pressed="false">
+            <h3>Hayati 6k Pods</h3>
+            <p class="product-price">£7.00</p>
+          </article>
+          <article class="product-card vape-card" role="button" tabindex="0" aria-pressed="false">
+            <h3>Hayati 25k Pods</h3>
+            <p class="product-price">£9.00</p>
+          </article>
+          <article class="product-card vape-card" role="button" tabindex="0" aria-pressed="false">
+            <h3>IVG Vapes</h3>
+            <p class="product-status">Available in store</p>
+          </article>
+          <article class="product-card vape-card" role="button" tabindex="0" aria-pressed="false">
+            <h3>Elux Juice</h3>
+            <p class="product-status">Available in store</p>
+          </article>
+          <article class="product-card vape-card" role="button" tabindex="0" aria-pressed="false">
+            <h3>Smoking Tools</h3>
+            <p class="product-status">Available in store</p>
+          </article>
+        </div>
+        <p class="catalog-note">
+          More flavours and options available — please check our prices inside the store.
+        </p>
+        <p class="age-note">For adults of legal purchasing age only. Please bring valid identification.</p>
+      </section>
+    </main>
+
+    <!-- Footer provides the responsible access reminder. -->
+    <footer>
+      <p>&copy; <span id="current-year"></span> Skye Blue. All rights reserved.</p>
+      <p>For adults of legal purchasing age only. Keep out of reach of children.</p>
+    </footer>
+
+    <!-- jQuery must load before the shared custom page behavior. -->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

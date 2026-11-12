@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Essential document metadata for browsers, search engines, and responsive screens. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+      name="description"
+      content="Explore Skye Blue, a neighborhood vape shop with a welcoming team, vape products, and refreshing drinks."
+    >
+    <meta name="theme-color" content="#07131f">
+    <title>Skye Blue | Vape Shop &amp; Drinks</title>
+
+    <!-- Loads the site's presentation rules from the assets/css folder. -->
+    <link rel="stylesheet" href="assets/css/style.css">
+  </head>
+  <body>
+    <!-- Site header contains the shop name and navigation to the page sections. -->
+    <header>
+      <a href="index.html" aria-label="Skye Blue home">Skye Blue</a>
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="site-navigation"
+        aria-label="Open navigation menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="site-navigation" aria-label="Main navigation">
+        <button class="menu-close" type="button" aria-label="Close navigation menu">&times;</button>
+        <ul>
+          <li><a href="index.html" data-page="home">Home</a></li>
+          <li><a href="vapes.html" data-page="vapes">Vapes</a></li>
+          <li><a href="drinks.html" data-page="drinks">Drinks</a></li>
+          <li><a href="index.html#about" data-page="about">About</a></li>
+        </ul>
+      </nav>
+    </header>
+    <!-- A dismissible backdrop sits behind the off-canvas mobile navigation. -->
+    <button class="menu-backdrop" type="button" aria-label="Close navigation menu" hidden></button>
+
+    <!-- Main wraps the page's primary content, beginning with the welcome hero. -->
+    <main>
+      <section id="home" aria-labelledby="hero-title">
+        <p>Welcome to Skye Blue</p>
+        <h1 id="hero-title">A little refreshment. A lot of good energy.</h1>
+        <p>Explore our shop, meet our team, and find out what makes Skye Blue your neighborhood stop.</p>
+        <a href="#about">Get to know us</a>
+      </section>
+
+      <!-- Clickable category links open their pages in this same browser window. -->
+      <section class="category-links" aria-label="Explore the shop">
+        <a class="category-card" href="vapes.html">
+          <span class="category-card__eyebrow">Explore the collection</span>
+          <span class="category-card__title">Vapes</span>
+          <span class="category-card__description">Browse the vape selection and learn more.</span>
+          <span class="category-card__action" aria-hidden="true">Explore Vapes <span>&rarr;</span></span>
+        </a>
+        <a class="category-card" href="drinks.html">
+          <span class="category-card__eyebrow">Take a refreshing break</span>
+          <span class="category-card__title">Cold Drinks</span>
+          <span class="category-card__description">See what refreshing options are available.</span>
+          <span class="category-card__action" aria-hidden="true">Explore Drinks <span>&rarr;</span></span>
+        </a>
+      </section>
+
+      <!-- Vape section introduces the shop's vape selection to eligible adult customers. -->
+      <section id="vape" aria-labelledby="vape-title">
+        <h2 id="vape-title">Vape</h2>
+        <p>
+          Browse our in-store selection and speak with our team for product information.
+          Available products vary by location and are for adults of legal purchasing age only.
+        </p>
+        <!-- JavaScript fills this container with product cards from the shop catalog. -->
+        <div class="product-grid" id="vape-products" aria-live="polite"></div>
+      </section>
+
+      <!-- Drinks section describes the refreshments available at the shop. -->
+      <section id="drinks" aria-labelledby="drinks-title">
+        <h2 id="drinks-title">Drinks</h2>
+        <p>Stop in for a refreshing drink. Ask our team about the current selection.</p>
+        <!-- JavaScript fills this container with drink cards from the shop catalog. -->
+        <div class="product-grid" id="drink-options" aria-live="polite"></div>
+      </section>
+
+      <!-- About section shares a brief introduction to the Skye Blue shop experience. -->
+      <section id="about" aria-labelledby="about-title">
+        <h2 id="about-title">About Skye Blue</h2>
+        <p>
+          We aim to make every visit welcoming, helpful, and straightforward.
+          Come by, say hello, and let our team assist you.
+        </p>
+      </section>
+    </main>
+
+    <!-- Footer contains copyright and a responsible access reminder. -->
+    <footer>
+      <p>&copy; <span id="current-year"></span> Skye Blue. All rights reserved.</p>
+      <p>For adults of legal purchasing age only. Keep out of reach of children.</p>
+    </footer>
+
+    <!-- Load jQuery before custom site JavaScript so it is available to script.js. -->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+    <!-- Custom page behavior; kept just before the closing body tag. -->
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Document metadata supports search previews and responsive display. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+      name="description"
+      content="Explore the cold drinks menu at Skye Blue, including Monster Energy, Red Bull, and Coca-Cola."
+    >
+    <meta name="theme-color" content="#07131f">
+    <title>Cold Drinks | Skye Blue</title>
+
+    <!-- Shared stylesheet applies the dark and sky-blue site design. -->
+    <link rel="stylesheet" href="assets/css/style.css">
+  </head>
+  <body class="page-drinks">
+    <!-- Shared site header with links to the home page, Vapes, and About. -->
+    <header>
+      <a href="index.html" aria-label="Skye Blue home">Skye Blue</a>
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="site-navigation"
+        aria-label="Open navigation menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="site-navigation" aria-label="Main navigation">
+        <button class="menu-close" type="button" aria-label="Close navigation menu">&times;</button>
+        <ul>
+          <li><a href="index.html" data-page="home">Home</a></li>
+          <li><a href="vapes.html" data-page="vapes">Vapes</a></li>
+          <li><a href="drinks.html" data-page="drinks">Drinks</a></li>
+          <li><a href="index.html#about" data-page="about">About</a></li>
+        </ul>
+      </nav>
+    </header>
+    <!-- A dismissible backdrop sits behind the off-canvas mobile navigation. -->
+    <button class="menu-backdrop" type="button" aria-label="Close navigation menu" hidden></button>
+
+    <!-- Main content introduces the drinks menu and presents each item and price. -->
+    <main>
+      <section id="home" aria-labelledby="page-title">
+        <p>Take a refreshing break</p>
+        <h1 id="page-title">Cold Drinks</h1>
+        <p>Pick a favorite from the Skye Blue drinks selection.</p>
+      </section>
+
+      <!-- Product cards use semantic articles so each drink is easy to scan. -->
+      <section id="drinks" aria-labelledby="drinks-title">
+        <h2 id="drinks-title">The drinks menu</h2>
+        <p>Clear prices, refreshing choices. Selection may vary by location.</p>
+        <div class="product-grid drinks-grid">
+          <article class="product-card drink-card" role="button" tabindex="0" aria-pressed="false">
+            <h3>Monster Energy</h3>
+            <p class="product-price">£1.85</p>
+          </article>
+          <article class="product-card drink-card" role="button" tabindex="0" aria-pressed="false">
+            <h3>Red Bull</h3>
+            <p class="product-price">£1.75</p>
+          </article>
+          <article class="product-card drink-card" role="button" tabindex="0" aria-pressed="false">
+            <h3>Coca-Cola Can</h3>
+            <p class="product-price">£1.00</p>
+          </article>
+          <article class="product-card drink-card" role="button" tabindex="0" aria-pressed="false">
+            <h3>Coca-Cola Bottle</h3>
+            <p class="product-price">£1.50</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer provides copyright and the responsible access reminder. -->
+    <footer>
+      <p>&copy; <span id="current-year"></span> Skye Blue. All rights reserved.</p>
+      <p>For adults of legal purchasing age only. Keep out of reach of children.</p>
+    </footer>
+
+    <!-- jQuery loads before custom behavior for the mobile menu and page details. -->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
